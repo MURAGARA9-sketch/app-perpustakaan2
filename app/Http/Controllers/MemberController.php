@@ -67,6 +67,12 @@ class MemberController extends Controller
     public function destroy(string $id)
     {
         $member = Member::findOrFail($id);
+
+        if ($member->loans()->exists()) {
+            return redirect()->route('members.index')
+                ->with('error', "Anggota \"{$member->nama}\" tidak bisa dihapus karena punya riwayat peminjaman.");
+        }
+
         $member->delete();
 
         return redirect()->route('members.index')

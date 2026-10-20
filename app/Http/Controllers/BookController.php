@@ -71,6 +71,12 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::findOrFail($id);
+
+        if ($book->loanItems()->exists()) {
+            return redirect()->route('books.index')
+                ->with('error', "Buku \"{$book->judul}\" tidak bisa dihapus karena tercatat di transaksi peminjaman.");
+        }
+
         $book->delete();
 
         return redirect()->route('books.index')
