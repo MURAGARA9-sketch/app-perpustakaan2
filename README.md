@@ -51,6 +51,10 @@ php artisan serve
 
 Buka `http://127.0.0.1:8000` di browser.
 
+## Dokumentasi API
+
+Daftar lengkap endpoint REST API beserta contoh request/response ada di [API.md](API.md).
+
 ## Pemahaman MVC
 
 **Model** adalah bagian yang mewakili data dan aturan bisnisnya, misalnya data buku dan cara menyimpannya ke database.
