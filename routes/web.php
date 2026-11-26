@@ -1,28 +1,41 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Public
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Resource routes
-Route::resource('books', BookController::class);
-Route::resource('categories', CategoryController::class)->except(['show']);
-Route::resource('members', MemberController::class);
-Route::resource('loans', LoanController::class);
+// Protected
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('books.index');
+    });
 
+    Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profil/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 
-Route::put('/loans/{id}/kembalikan', [LoanController::class, 'kembalikan'])
-    ->name('loans.kembalikan');
+    Route::resource('books', BookController::class);
+    Route::resource('members', MemberController::class);
+    Route::resource('loans', LoanController::class);
+    Route::put('/loans/{id}/kembalikan', [LoanController::class, 'kembalikan'])
+        ->name('loans.kembalikan');
 
-// Tugas Pertemuan 2: route group dengan prefix /admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/info', function () {
-        return 'Halaman info admin - Sistem Perpustakaan Digital Kampus';
-    })->name('info');
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('categories', CategoryController::class)->except(['show']);
+
+        // Tugas Pertemuan 2: route group dengan prefix /admin
+        Route::prefix('admin')->name('admin.')->group(function () {
+            Route::get('/info', function () {
+                return 'Halaman info admin - Sistem Perpustakaan Digital Kampus';
+            })->name('info');
+        });
+    });
 });
