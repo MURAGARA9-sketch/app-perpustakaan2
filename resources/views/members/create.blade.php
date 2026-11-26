@@ -35,7 +35,7 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-        <label for="alamat">Alamat (opsional)</label>
+        <label for="alamat">Alamat</label>
         <textarea name="alamat" id="alamat" rows="3">{{ old('alamat') }}</textarea>
         @error('alamat')
             <div class="error">{{ $message }}</div>
@@ -43,7 +43,6 @@
 
         <label for="status">Status</label>
         <select name="status" id="status">
-            <option value="">-- Pilih Status --</option>
             <option value="aktif" @selected(old('status', 'aktif') === 'aktif')>Aktif</option>
             <option value="nonaktif" @selected(old('status') === 'nonaktif')>Nonaktif</option>
         </select>
