@@ -24,6 +24,14 @@
         form.form-stacked input, form.form-stacked select, form.form-stacked textarea { width: 100%; padding: 6px; margin-top: 4px; }
         form.form-stacked .btn { margin-top: 20px; }
         .error { color: #b91c1c; font-size: 14px; margin-top: 4px; }
+        .readonly { background: #f3f4f6; padding: 8px; border-radius: 4px; margin-top: 4px; }
+        .checkbox-list { border: 1px solid #ccc; border-radius: 4px; padding: 10px; margin-top: 4px; max-height: 200px; overflow-y: auto; }
+        form.form-stacked .checkbox-list label { font-weight: normal; margin-top: 0; }
+        form.form-stacked .checkbox-list input { width: auto; }
+        .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: bold; }
+        .badge-dipinjam { background: #fef3c7; color: #92400e; }
+        .badge-dikembalikan { background: #d1fae5; color: #065f46; }
+        .badge-terlambat { background: #fee2e2; color: #991b1b; }
         footer { text-align: center; padding: 20px; color: #6b7280; font-size: 14px; border-top: 1px solid #e5e7eb; margin-top: 40px; }
     </style>
 </head>
