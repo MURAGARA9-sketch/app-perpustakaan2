@@ -16,8 +16,9 @@ class StoreMemberRequest extends FormRequest
     {
         return [
             'nama'          => ['required', 'string', 'max:255'],
-            'nim'           => ['required', 'string', 'max:20', 'unique:members,nim'],
-            'email'         => ['required', 'email', 'max:255', 'unique:members,email'],
+            // Rule unique:members,... ditambahkan di Pertemuan 5 setelah tabel members dibuat lewat migration.
+            'nim'           => ['required', 'string', 'max:20'],
+            'email'         => ['required', 'email', 'max:255'],
             'nomor_telepon' => ['required', 'string', 'max:20'],
             'alamat'        => ['nullable', 'string'],
             'status'        => ['required', 'in:aktif,nonaktif'],
